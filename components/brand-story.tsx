@@ -6,10 +6,14 @@ export default function BrandStory() {
     <section className="py-16 md:py-24 bg-muted">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* Image (replaced with About emblem) */}
           <div className="order-2 md:order-1">
-            <div className="w-full rounded-lg overflow-hidden bg-muted/50 flex items-center justify-center p-6">
-              <img src="/site-logo.png" alt="Numaans Silver Shop Artisan Emblem" className="w-full h-full object-contain" loading="eager" />
+            <div className="aspect-[4/3] w-full overflow-hidden rounded-lg bg-muted">
+              <img
+                src="/artisan-hands-crafting-silver-jewellery.jpg"
+                alt="An artisan carefully crafting silver jewellery"
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
             </div>
           </div>
 
@@ -21,9 +25,9 @@ export default function BrandStory() {
                 Crafted with Passion, Worn with Pride
               </h2>
               <p className="text-muted-foreground leading-relaxed text-pretty">
-                Numaans Silver Shop was born from a vision to create timeless silver jewellery that celebrates individuality and
-                minimalist elegance. Each piece is handcrafted by skilled artisans using pure 925 silver, ensuring
-                quality and durability that lasts a lifetime.
+                GIFTORA was born from a vision to create timeless silver gifts that celebrate meaningful moments and
+                minimalist elegance. Each piece is handcrafted by skilled artisans using pure 925 silver, ensuring quality
+                and durability that lasts a lifetime.
               </p>
               <p className="text-muted-foreground leading-relaxed text-pretty">
                 We believe in sustainable practices and ethical sourcing. Our commitment to excellence means every
@@ -32,7 +36,7 @@ export default function BrandStory() {
             </div>
 
             <Link href="/about">
-              <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90">
+              <Button className="rounded-full px-6">
                 Learn More About Us
               </Button>
             </Link>

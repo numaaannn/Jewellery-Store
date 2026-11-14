@@ -5,9 +5,9 @@ import Link from "next/link"
 import { Menu, X, ShoppingBag, Search } from "lucide-react"
 import { useCart } from "@/components/cart-provider"
 import CartDrawer from "@/components/cart-drawer"
-import dynamic from "next/dynamic"
 import SearchBar from "@/components/search-bar"
 import { ThemeToggle } from "@/components/theme-toggle"
+import BrandLogo from "@/components/brand-logo"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -16,19 +16,21 @@ export default function Navbar() {
 
   const navLinks = [
     { label: "Shop", href: "/shop" },
-    { label: "Custom Jewelry", href: "/custom-jewelry" },
+    { label: "Custom Jewellery", href: "/custom-jewelry" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
   ]
 
   return (
-    <nav className="sticky top-0 z-50 bg-background border-b border-border transition-all duration-300 ease-out">
+    <nav className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md transition-all duration-300 ease-out">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="flex-shrink-0 flex items-center gap-3">
-            <img src="/site-logo.png" alt="Numaans Silver Shop" className="h-8 md:h-10 object-contain" />
-            <span className="hidden sm:inline text-xl font-bold text-foreground tracking-wider hover:text-primary transition-colors duration-300">Numaans Silver Shop</span>
+          <Link href="/" className="flex-shrink-0 flex items-center group" aria-label="GIFTORA home">
+            <BrandLogo
+              alt="GIFTORA — Silver Gifts"
+              className="h-12 w-12 transition-transform duration-300 group-hover:scale-[1.03] sm:h-14 sm:w-14"
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -37,7 +39,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors duration-300 relative group"
+                className="text-sm font-semibold uppercase tracking-[0.12em] text-foreground hover:text-primary transition-colors duration-300 relative group"
               >
                 {link.label}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
@@ -49,17 +51,17 @@ export default function Navbar() {
           <div className="flex items-center gap-4">
             <button
               onClick={() => setShowSearch(true)}
-              className="p-2 hover:bg-muted rounded-lg transition-colors duration-300 hover:shadow-lg hover:-translate-y-1"
+              className="p-2 text-foreground hover:bg-muted rounded-lg transition-colors duration-300 hover:-translate-y-0.5"
               aria-label="Search"
             >
-              <Search className="w-5 h-5 text-foreground" />
+              <Search className="w-5 h-5" />
             </button>
             <button
               onClick={openCart}
-              className="p-2 hover:bg-muted rounded-lg transition-colors duration-300 hover:shadow-lg hover:-translate-y-1 relative"
+              className="p-2 text-foreground hover:bg-muted rounded-lg transition-colors duration-300 hover:-translate-y-0.5 relative"
               aria-label="Open cart"
             >
-              <ShoppingBag className="w-5 h-5 text-foreground" />
+              <ShoppingBag className="w-5 h-5" />
               {count > 0 && (
                 <span className="absolute -top-1 -right-1 min-w-5 h-5 px-1 rounded-full bg-primary text-primary-foreground text-[10px] flex items-center justify-center">
                   {count}

@@ -214,15 +214,15 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               <div className="grid grid-cols-3 gap-4 pt-6 border-t border-border">
                 <div className="text-center space-y-2">
                   <Truck className="w-6 h-6 text-primary mx-auto" />
-                  <p className="text-xs font-semibold text-muted-foreground">Free Shipping</p>
+                  <p className="text-xs font-semibold text-muted-foreground">925 Silver</p>
                 </div>
                 <div className="text-center space-y-2">
                   <Shield className="w-6 h-6 text-primary mx-auto" />
-                  <p className="text-xs font-semibold text-muted-foreground">Lifetime Warranty</p>
+                  <p className="text-xs font-semibold text-muted-foreground">Custom Designs</p>
                 </div>
                 <div className="text-center space-y-2">
                   <RotateCcw className="w-6 h-6 text-primary mx-auto" />
-                  <p className="text-xs font-semibold text-muted-foreground">Easy Returns</p>
+                  <p className="text-xs font-semibold text-muted-foreground">Personal Support</p>
                 </div>
               </div>
             </div>

@@ -30,8 +30,8 @@ export async function POST(req: Request) {
 
     const systemPrompt = `You are a helpful jewelry store assistant. Answer customer questions politely and professionally. Provide information about jewelry products, pricing, materials, shipping, returns, and store policies. If information is unavailable, politely ask the customer to contact store support.
 
-Here is store-specific information for Numaans Silver Shop:
-- Store Name: Numaans Silver Shop
+Here is store-specific information for GIFTORA:
+- Store Name: GIFTORA
 - Contact Email: contact@numaanssilvershop.com
 - Contact Phone / WhatsApp: +91-8390963603 (WhatsApp link: https://wa.me/918390963603)
 - Product Categories: Rings, Necklaces, Earrings, Bracelets, Anklets, Bangles, Pendants, Sets, Chains, Cufflinks, and Custom Jewelry.

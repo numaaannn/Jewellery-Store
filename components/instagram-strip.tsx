@@ -4,32 +4,27 @@ const instagramPosts = [
   {
     id: 1,
     image: "/instagram-silver-jewelry-1.jpg",
-    link: "https://instagram.com",
+    link: "https://instagram.com/giftora.nagpur",
   },
   {
     id: 2,
     image: "/instagram-silver-jewelry-2.jpg",
-    link: "https://instagram.com",
+    link: "https://instagram.com/giftora.nagpur",
   },
   {
     id: 3,
     image: "/instagram-silver-jewelry-3.jpg",
-    link: "https://instagram.com",
+    link: "https://instagram.com/giftora.nagpur",
   },
   {
     id: 4,
     image: "/instagram-silver-jewelry-4.jpg",
-    link: "https://instagram.com",
+    link: "https://instagram.com/giftora.nagpur",
   },
   {
     id: 5,
     image: "/instagram-silver-jewelry-5.jpg",
-    link: "https://instagram.com",
-  },
-  {
-    id: 6,
-    image: "/placeholder.svg?height=300&width=300",
-    link: "https://instagram.com",
+    link: "https://instagram.com/giftora.nagpur",
   },
 ]
 
@@ -39,19 +34,20 @@ export default function InstagramStrip() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2 text-balance">Follow Us on Instagram</h2>
-          <p className="text-muted-foreground mb-6">@numaanssilvershop</p>
+          <p className="text-muted-foreground mb-6">@giftora.nagpur</p>
           <Link
-            href="https://instagram.com"
+            href="https://instagram.com/giftora.nagpur"
             target="_blank"
+            rel="noopener noreferrer"
             className="inline-block text-primary font-semibold hover:text-primary/80 transition-colors"
           >
             Follow for daily inspiration
           </Link>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {instagramPosts.map((post) => (
-            <Link key={post.id} href={post.link} target="_blank">
+            <Link key={post.id} href={post.link} target="_blank" rel="noopener noreferrer">
               <div className="relative overflow-hidden rounded-lg aspect-square group cursor-pointer">
                 <img
                   src={post.image || "/placeholder.svg"}

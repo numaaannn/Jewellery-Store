@@ -91,7 +91,7 @@ const categories = [
   "Anklets",
   "Pendants",
   "Charms",
-  "Custom Jewelry",
+  "Custom Jewellery",
 ]
 
 // ensure each real category (exclude "All") has 10 products by augmenting allProducts
@@ -104,7 +104,7 @@ const _images: Record<string, string> = {
   Earrings: "/icons/earrings.svg",
   Anklets: "/icons/anklets.svg",
   Charms: "/icons/charms.svg",
-  "Custom Jewelry": "/icons/custom.svg",
+  "Custom Jewellery": "/icons/custom.svg",
 }
 
 categories

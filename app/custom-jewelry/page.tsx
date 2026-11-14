@@ -2,6 +2,8 @@
 
 import Link from "next/link"
 import Navbar from "@/components/navbar"
+import BrandLogo from "@/components/brand-logo"
+import { CONTACT_WHATSAPP_URL } from "@/lib/site-info"
 
 export default function CustomJewelryPage() {
   return (
@@ -12,19 +14,19 @@ export default function CustomJewelryPage() {
         <div className="relative h-[70vh] w-full overflow-hidden">
           <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-background to-background/95">
             <div className="w-full h-full flex items-center justify-center p-6">
-              <img src="/site-logo.png" alt="Numaans Silver Shop Emblem" className="object-contain w-48 h-48 md:w-64 md:h-64 opacity-95" loading="eager" />
+              <BrandLogo alt="GIFTORA — Silver Gifts" className="h-48 w-48 opacity-95 md:h-64 md:w-64" />
             </div>
           </div>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center text-white p-8 backdrop-blur-sm bg-black/30 rounded-xl max-w-4xl">
               <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">
-                Elite Custom Silver Jewelry
+                Custom Silver Jewellery
               </h1>
               <p className="text-xl md:text-2xl mb-8">
                 From Your Vision to Reality Through Advanced CAD/CAM Technology
               </p>
               <Link
-                href="https://wa.me/8390963603"
+                href={CONTACT_WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-md bg-[#25D366] px-8 py-4 text-lg font-semibold text-white shadow-lg hover:bg-[#128C7E] transition-all duration-300 hover:scale-105"
@@ -51,7 +53,7 @@ export default function CustomJewelryPage() {
             <div className="grid md:grid-cols-3 gap-8 mb-20">
               <div className="relative h-96 rounded-xl overflow-hidden">
                 <div className="w-full h-full bg-muted/50 flex items-center justify-center p-6">
-                  <img src="/site-logo.png" alt="Custom Silver Design Process" className="object-contain w-32 h-32" loading="eager" />
+                  <BrandLogo alt="GIFTORA — Silver Gifts" className="h-32 w-32" />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
                   <div className="text-white">
@@ -62,7 +64,7 @@ export default function CustomJewelryPage() {
               </div>
               <div className="relative h-96 rounded-xl overflow-hidden">
                 <div className="w-full h-full bg-muted/50 flex items-center justify-center p-6">
-                  <img src="/site-logo.png" alt="CAM Production Process" className="object-contain w-32 h-32" loading="eager" />
+                  <BrandLogo alt="GIFTORA — Silver Gifts" className="h-32 w-32" />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
                   <div className="text-white">
@@ -73,7 +75,7 @@ export default function CustomJewelryPage() {
               </div>
               <div className="relative h-96 rounded-xl overflow-hidden">
                 <div className="w-full h-full bg-muted/50 flex items-center justify-center p-6">
-                  <img src="/site-logo.png" alt="Expert Finishing" className="object-contain w-32 h-32" loading="eager" />
+                  <BrandLogo alt="GIFTORA — Silver Gifts" className="h-32 w-32" />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
                   <div className="text-white">
@@ -90,16 +92,10 @@ export default function CustomJewelryPage() {
             <h2 className="text-4xl font-bold text-center mb-12">Elite Custom Creations</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
-                "/site-logo.png",
-                "/site-logo.png",
-                "/site-logo.png",
-                "/site-logo.png",
-                "/site-logo.png",
-                "/site-logo.png"
-              ].map((src, index) => (
-                <div key={index} className="group relative h-80 rounded-xl overflow-hidden">
+                1, 2, 3, 4, 5, 6
+              ].map((design, index) => (                <div key={design} className="group relative h-80 rounded-xl overflow-hidden">
                   <div className="w-full h-full bg-muted/50 flex items-center justify-center p-6">
-                    <img src={src} alt={`Custom Silver Jewelry ${index + 1}`} className="object-contain w-full h-full p-4" loading="eager" />
+                    <BrandLogo alt="GIFTORA — Silver Gifts" className="h-full w-full p-4" />
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                     <div className="p-6 text-white">
@@ -121,7 +117,7 @@ export default function CustomJewelryPage() {
             </p>
             <div className="flex flex-col items-center gap-4">
               <Link
-                href="https://wa.me/918668738687"
+                href={CONTACT_WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-md bg-[#25D366] px-8 py-4 text-lg font-semibold text-white shadow-lg hover:bg-[#128C7E] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25D366] transition-all duration-300 hover:scale-105"

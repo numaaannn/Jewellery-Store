@@ -4,110 +4,74 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Numaans Silver Shop Brand Colors - Light Mode */
-  /* Fallbacks for browsers without OKLCH support */
-  --background: #ffffff;
-  --foreground: #111827;
-  /* Numaans Silver Shop Brand Colors - Light Mode (preferred, when supported) */
-  --background: oklch(0.98 0 0);
-  --foreground: oklch(0.11 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.11 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.11 0 0);
-  --primary: oklch(0.75 0.05 60);
-  --primary-foreground: oklch(0.11 0 0);
-  --secondary: oklch(0.11 0 0);
-  --secondary-foreground: oklch(1 0 0);
-  --muted: oklch(0.92 0 0);
-  --muted-foreground: oklch(0.5 0 0);
-  --accent: oklch(0.78 0.08 20);
-  --accent-foreground: oklch(0.11 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.95 0 0);
-  --input: oklch(0.98 0 0);
-  --ring: oklch(0.75 0.05 60);
-  --chart-1: oklch(0.75 0.05 60);
-  --chart-2: oklch(0.78 0.08 20);
-  --chart-3: oklch(0.11 0 0);
-  --chart-4: oklch(0.92 0 0);
+  --background: #fdfbfc;
+  --foreground: #292329;
+  --card: #ffffff;
+  --card-foreground: #292329;
+  --popover: #ffffff;
+  --popover-foreground: #292329;
+  --primary: #a64e68;
+  --primary-foreground: #ffffff;
+  --secondary: #302a30;
+  --secondary-foreground: #ffffff;
+  --muted: #f3eef1;
+  --muted-foreground: #6f656d;
+  --accent: #b49aa5;
+  --accent-foreground: #292329;
+  --destructive: #e11d48;
+  --destructive-foreground: #ffffff;
+  --border: #e6dfe3;
+  --input: #f3eef1;
+  --ring: #a64e68;
+  --chart-1: #a64e68;
+  --chart-2: #b49aa5;
+  --chart-3: #302a30;
+  --chart-4: #f3eef1;
+  --chart-5: #6f656d;
+  --radius: 0.9rem;
+  --sidebar: #fdfbfc;
+  --sidebar-foreground: #292329;
+  --sidebar-primary: #a64e68;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f3eef1;
+  --sidebar-accent-foreground: #292329;
+  --sidebar-border: #e6dfe3;
+  --sidebar-ring: #a64e68;
 }
 
 .dark {
-  /* Numaans Silver Shop Brand Colors - Dark Mode */
-  /* Fallbacks for browsers without OKLCH support */
-  --background: #0b1220;
-  --foreground: #ffffff;
-  /* Numaans Silver Shop Brand Colors - Dark Mode (preferred, when supported) */
-  --background: oklch(0.11 0 0);
-  --foreground: oklch(0.95 0 0);
-  --card: oklch(0.15 0 0);
-  --card-foreground: oklch(0.95 0 0);
-  --popover: oklch(0.15 0 0);
-  --popover-foreground: oklch(0.95 0 0);
-  --primary: oklch(0.75 0.05 60);
-  --primary-foreground: oklch(0.11 0 0);
-  --secondary: oklch(0.95 0 0);
-  --secondary-foreground: oklch(0.11 0 0);
-  --muted: oklch(0.25 0 0);
-  --muted-foreground: oklch(0.65 0 0);
-  --accent: oklch(0.78 0.08 20);
-  --accent-foreground: oklch(0.95 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.25 0 0);
-  --input: oklch(0.15 0 0);
-  --ring: oklch(0.75 0.05 60);
-  --chart-1: oklch(0.75 0.05 60);
-  --chart-2: oklch(0.78 0.08 20);
-  --chart-3: oklch(0.95 0 0);
-  --chart-4: oklch(0.25 0 0);
-  --chart-5: oklch(0.5 0 0);
-  --radius: 0.25rem;
-  --sidebar: oklch(0.98 0 0);
-  --sidebar-foreground: oklch(0.11 0 0);
-  --sidebar-primary: oklch(0.75 0.05 60);
-  --sidebar-primary-foreground: oklch(0.11 0 0);
-  --sidebar-accent: oklch(0.78 0.08 20);
-  --sidebar-accent-foreground: oklch(0.11 0 0);
-  --sidebar-border: oklch(0.95 0 0);
-  --sidebar-ring: oklch(0.75 0.05 60);
-}
-
-.dark {
-  --background: oklch(0.15 0 0);
-  --foreground: oklch(0.98 0 0);
-  --card: oklch(0.2 0 0);
-  --card-foreground: oklch(0.98 0 0);
-  --popover: oklch(0.2 0 0);
-  --popover-foreground: oklch(0.98 0 0);
-  --primary: oklch(0.75 0.05 60);
-  --primary-foreground: oklch(0.15 0 0);
-  --secondary: oklch(0.98 0 0);
-  --secondary-foreground: oklch(0.15 0 0);
-  --muted: oklch(0.35 0 0);
-  --muted-foreground: oklch(0.7 0 0);
-  --accent: oklch(0.78 0.08 20);
-  --accent-foreground: oklch(0.15 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.3 0 0);
-  --input: oklch(0.25 0 0);
-  --ring: oklch(0.75 0.05 60);
-  --chart-1: oklch(0.75 0.05 60);
-  --chart-2: oklch(0.78 0.08 20);
-  --chart-3: oklch(0.98 0 0);
-  --chart-4: oklch(0.35 0 0);
-  --chart-5: oklch(0.7 0 0);
-  --sidebar: oklch(0.15 0 0);
-  --sidebar-foreground: oklch(0.98 0 0);
-  --sidebar-primary: oklch(0.75 0.05 60);
-  --sidebar-primary-foreground: oklch(0.15 0 0);
-  --sidebar-accent: oklch(0.78 0.08 20);
-  --sidebar-accent-foreground: oklch(0.15 0 0);
-  --sidebar-border: oklch(0.3 0 0);
-  --sidebar-ring: oklch(0.75 0.05 60);
+  --background: #171419;
+  --foreground: #f7f2f5;
+  --card: #211d23;
+  --card-foreground: #f7f2f5;
+  --popover: #211d23;
+  --popover-foreground: #f7f2f5;
+  --primary: #e39ab0;
+  --primary-foreground: #291a21;
+  --secondary: #eee5eb;
+  --secondary-foreground: #292329;
+  --muted: #28232a;
+  --muted-foreground: #c3b8c0;
+  --accent: #c5acb8;
+  --accent-foreground: #211d23;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: rgba(227, 213, 221, 0.18);
+  --input: #28232a;
+  --ring: #e39ab0;
+  --chart-1: #e39ab0;
+  --chart-2: #c5acb8;
+  --chart-3: #f7f2f5;
+  --chart-4: #28232a;
+  --chart-5: #c3b8c0;
+  --sidebar: #171419;
+  --sidebar-foreground: #f7f2f5;
+  --sidebar-primary: #e39ab0;
+  --sidebar-primary-foreground: #211d23;
+  --sidebar-accent: #28232a;
+  --sidebar-accent-foreground: #f7f2f5;
+  --sidebar-border: rgba(227, 213, 221, 0.18);
+  --sidebar-ring: #e39ab0;
 }
 
 @theme inline {
@@ -155,8 +119,198 @@
   * {
     @apply border-border outline-ring/50;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-family: "Inter", "Segoe UI", sans-serif;
+    background-color: var(--background);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    letter-spacing: -0.04em;
+    font-weight: 700;
+  }
+
+  a,
+  button {
+    transition: all 0.2s ease;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--primary) 22%, transparent);
+  }
+}
+
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(56px, 9vw, 112px) 24px clamp(48px, 7vw, 88px);
+  background:
+    radial-gradient(ellipse at 82% 20%, color-mix(in srgb, var(--primary) 10%, transparent), transparent 34%),
+    var(--muted);
+}
+
+.hero-section::after {
+  position: absolute;
+  top: 50%;
+  right: max(-8vw, -120px);
+  width: clamp(230px, 38vw, 520px);
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in srgb, var(--primary) 14%, transparent);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 1120px);
+  margin: 0 auto;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  max-width: 930px;
+  margin: 0;
+  color: var(--foreground);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(46px, 8vw, 96px);
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
+.hero-description {
+  max-width: 530px;
+  margin: 24px 0 0;
+  color: var(--muted-foreground);
+  font-size: clamp(15px, 1.6vw, 18px);
+  line-height: 1.75;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.hero-controls {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 54px;
+}
+
+.hero-dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  cursor: pointer;
+}
+
+.hero-dot[aria-current="true"] {
+  width: 26px;
+  background: var(--primary);
+}
+
+.hero-arrow {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--background);
+  color: var(--foreground);
+  cursor: pointer;
+}
+
+.hero-arrow:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.hero-slide-count {
+  margin-left: 9px;
+  color: var(--muted-foreground);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+}
+
+@media (max-width: 640px) {
+  .hero-section {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .hero-section::after {
+    top: auto;
+    right: -105px;
+    bottom: -96px;
+    width: 240px;
+    transform: none;
+  }
+
+  .hero-eyebrow {
+    margin-bottom: 19px;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+  }
+
+  .hero-title {
+    font-size: clamp(44px, 12vw, 65px);
+  }
+
+  .hero-description {
+    margin-top: 18px;
+    font-size: 14px;
+  }
+
+  .hero-actions {
+    margin-top: 24px;
+  }
+
+  .hero-controls {
+    margin-top: 38px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 

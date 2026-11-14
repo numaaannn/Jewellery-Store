@@ -17,7 +17,7 @@ export default function ChatbotDrawer() {
     {
       id: "welcome",
       role: "assistant",
-      content: "Hi there! Welcome to **Numaans Silver Shop** AI assistant. ✨\n\nI can help you browse our certified 925 Sterling Silver collection, look up shipping details, find your ring size, or guide you through creating custom-engraved name jewelry. How can I help you today?",
+      content: "Hi there! Welcome to the **GIFTORA** AI assistant. ✨\n\nI can help you browse our 925 sterling silver collection, find your ring size, or learn about custom-engraved name jewellery. How can I help you today?",
     },
   ])
   const [inputValue, setInputValue] = useState("")
@@ -106,7 +106,7 @@ export default function ChatbotDrawer() {
         {
           id: "welcome",
           role: "assistant",
-          content: "Hi there! Welcome to **Numaans Silver Shop** AI assistant. ✨\n\nI can help you browse our certified 925 Sterling Silver collection, look up shipping details, find your ring size, or guide you through creating custom-engraved name jewelry. How can I help you today?",
+          content: "Hi there! Welcome to the **GIFTORA** AI assistant. ✨\n\nI can help you browse our 925 sterling silver collection, find your ring size, or learn about custom-engraved name jewellery. How can I help you today?",
         },
       ])
       setError(null)
@@ -115,7 +115,7 @@ export default function ChatbotDrawer() {
 
   const suggestions = [
     { label: "💍 Ring Size Guide", prompt: "How do I find my ring size?" },
-    { label: "✨ Custom Jewelry", prompt: "How can I order custom jewelry like engraved name rings?" },
+    { label: "✨ Custom Jewellery", prompt: "How can I order custom jewellery like engraved name rings?" },
     { label: "📦 Shipping Info", prompt: "What are your shipping rates and delivery times?" },
     { label: "🔄 Return Policy", prompt: "What is your return and exchange policy?" },
   ]
@@ -155,7 +155,7 @@ export default function ChatbotDrawer() {
   return (
     <>
       {/* Floating Trigger Button */}
-      <div className="fixed bottom-6 right-6 z-50">
+      <div className="fixed bottom-6 right-4 z-[61] sm:right-6">
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="relative group p-4 flex items-center justify-center rounded-full bg-primary text-primary-foreground shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border border-border"
@@ -200,7 +200,7 @@ export default function ChatbotDrawer() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 30 }}
             transition={{ type: "spring", duration: 0.4 }}
-            className="fixed bottom-24 right-6 w-[400px] h-[600px] max-w-[calc(100vw-2rem)] max-h-[calc(100vh-8rem)] bg-card border border-border shadow-2xl rounded-2xl flex flex-col overflow-hidden z-50 sm:w-[400px] sm:h-[600px] w-full h-[calc(100vh-2rem)] bottom-4 right-4 sm:bottom-24 sm:right-6 sm:rounded-2xl rounded-xl"
+            className="fixed inset-x-3 bottom-20 z-[60] flex h-[min(600px,calc(100dvh-10rem))] w-auto flex-col overflow-hidden rounded-xl border border-border bg-card shadow-2xl sm:inset-x-auto sm:bottom-24 sm:right-6 sm:h-[min(600px,calc(100dvh-12rem))] sm:w-[400px] sm:rounded-2xl"
           >
             {/* Header */}
             <div className="p-4 border-b border-border bg-muted/30 flex items-center justify-between">
@@ -210,7 +210,7 @@ export default function ChatbotDrawer() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-sm text-foreground flex items-center gap-1.5">
-                    Numaans AI Assistant
+                    GIFTORA AI Assistant
                     <span className="flex h-2 w-2 relative">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>

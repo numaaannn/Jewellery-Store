@@ -10,9 +10,9 @@ import ChatbotDrawer from "@/components/chatbot-drawer"
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
 export const metadata: Metadata = {
-  title: "Numaans Silver Shop",
+  title: "GIFTORA | Silver Gifts",
   description:
-    "Discover Numaans Silver Shop's collection of pure 925 sterling silver jewellery. Shop minimalist rings, delicate chains, elegant pendants, and custom name jewellery. Handcrafted for the modern you.",
+    "Discover GIFTORA's collection of premium silver gifts and thoughtful 925 silver jewellery for meaningful moments.",
   keywords: [
     "925 silver jewellery",
     "sterling silver rings",
@@ -24,30 +24,30 @@ export const metadata: Metadata = {
   ],
   generator: "v0.app",
   icons: {
-    icon: "/site-logo.png",
-    shortcut: "/site-logo.png",
-    apple: "/site-logo.png",
+    icon: "/giftora-logo-light.png",
+    shortcut: "/giftora-logo-light.png",
+    apple: "/giftora-logo-light.png",
   },
   openGraph: {
-    title: "Numaans Silver Shop – Timeless 925 Silver Jewellery",
+    title: "GIFTORA | Silver Gifts",
     description:
-      "Pure 925 sterling silver jewellery crafted for the modern you. Discover minimal rings, chains, pendants, and custom designs.",
+      "Thoughtfully curated silver gifts and fine 925 silver jewellery designed for memorable moments.",
     type: "website",
     url: "https://numaanssilvershop.com",
     images: [
       {
-        url: "/site-logo.png",
-        width: 1200,
-        height: 1200,
-        alt: "Numaans Silver Shop",
+        url: "/giftora-logo-light.png",
+        width: 768,
+        height: 768,
+        alt: "GIFTORA",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Numaans Silver Shop – Timeless 925 Silver Jewellery",
-    description: "Pure 925 sterling silver jewellery crafted for the modern you.",
-    images: ["/site-logo.png"],
+    title: "GIFTORA | Silver Gifts",
+    description: "Thoughtfully curated silver gifts and fine 925 silver jewellery designed for memorable moments.",
+    images: ["/giftora-logo-light.png"],
   },
   robots: {
     index: true,

@@ -6,7 +6,9 @@ export async function GET() {
     "/",
     "/shop",
     "/about",
-    "/custom",
+    "/custom-jewelry",
+    "/faq",
+    "/policies",
     "/cart",
   ]
 

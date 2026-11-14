@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Mail, Phone, MapPin, Facebook, Instagram, Twitter, MessageSquare } from "lucide-react"
+import { Mail, Phone, MapPin, Instagram, MessageSquare } from "lucide-react"
 import { CONTACT_EMAIL, CONTACT_PHONE_DISPLAY, CONTACT_PHONE_TEL, CONTACT_WHATSAPP_URL, COMPANY_NAME } from "@/lib/site-info"
 
 export default function Footer() {
@@ -14,18 +14,18 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="text-2xl font-bold">{COMPANY_NAME}</h3>
             <p className="text-secondary-foreground/80 text-sm leading-relaxed">
-              Timeless silver jewellery crafted with passion and precision for the modern you.
+              Thoughtful 925 silver jewellery, made to give and made to keep.
             </p>
             <div className="flex gap-4">
-              <Link href="#" className="hover:text-accent transition-colors">
-                <Facebook className="w-5 h-5" />
-              </Link>
-              <Link href="#" className="hover:text-accent transition-colors">
+              <a
+                href="https://instagram.com/giftora.nagpur"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${COMPANY_NAME} on Instagram`}
+                className="hover:text-accent transition-colors"
+              >
                 <Instagram className="w-5 h-5" />
-              </Link>
-              <Link href="#" className="hover:text-accent transition-colors">
-                <Twitter className="w-5 h-5" />
-              </Link>
+              </a>
             </div>
           </div>
 
@@ -37,9 +37,6 @@ export default function Footer() {
                 <Link href="/shop" className="hover:text-accent transition-colors">
                   Shop
                 </Link>
-              </li>
-              <li>
-                {/* Collections removed */}
               </li>
               <li>
                 <Link href="/about" className="hover:text-accent transition-colors">
@@ -64,17 +61,17 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/shipping" className="hover:text-accent transition-colors">
+                <Link href="/policies#shipping" className="hover:text-accent transition-colors">
                   Shipping Info
                 </Link>
               </li>
               <li>
-                <Link href="/returns" className="hover:text-accent transition-colors">
+                <Link href="/policies#returns" className="hover:text-accent transition-colors">
                   Returns & Exchanges
                 </Link>
               </li>
               <li>
-                <Link href="/warranty" className="hover:text-accent transition-colors">
+                <Link href="/policies#warranty" className="hover:text-accent transition-colors">
                   Warranty
                 </Link>
               </li>
@@ -105,7 +102,7 @@ export default function Footer() {
               </li>
               <li className="flex gap-3">
                 <MapPin className="w-5 h-5 flex-shrink-0" />
-                <span>Nagpur Maharsahtra</span>
+                <span>Nagpur, Maharashtra, India</span>
               </li>
             </ul>
           </div>
@@ -117,10 +114,10 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-secondary-foreground/70">
             <p>&copy; {currentYear} {COMPANY_NAME}. All rights reserved.</p>
             <div className="flex gap-6">
-              <Link href="/privacy" className="hover:text-accent transition-colors">
+              <Link href="/policies#privacy" className="hover:text-accent transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="hover:text-accent transition-colors">
+              <Link href="/policies#terms" className="hover:text-accent transition-colors">
                 Terms of Service
               </Link>
             </div>
