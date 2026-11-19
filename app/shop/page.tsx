@@ -1,153 +1,115 @@
 "use client"
 
-import { useState } from "react"
+import { Suspense, useEffect, useRef, useState } from "react"
+import { useSearchParams } from "next/navigation"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import ProductCard from "@/components/product-card"
 import { ChevronDown } from "lucide-react"
+import { catalogListings, collectionOptions, type CollectionId } from "@/data/store-products"
 
-const allProducts = [
-  {
-    id: "1",
-    name: "Ring",
-    price: 0.0,
-    image: "/icons/rings.svg",
-    category: "Rings",
-    rating: 4.8,
-    reviews: 124,
-  },
-  {
-    id: "2",
-    name: "Chain",
-    price: 0.0,
-    image: "/icons/chains.svg",
-    category: "Chains",
-    rating: 4.9,
-    reviews: 89,
-  },
-  {
-    id: "3",
-    name: "Pendant",
-    price: 0.0,
-    image: "/icons/pendants.svg",
-    category: "Pendants",
-    rating: 4.7,
-    reviews: 156,
-  },
-  {
-    id: "4",
-    name: "Bracelet",
-    price: 0.0,
-    image: "/icons/bracelets.svg",
-    category: "Bracelets",
-    rating: 4.6,
-    reviews: 92,
-  },
-  {
-    id: "5",
-    name: "Ring",
-    price: 0.0,
-    image: "/icons/rings.svg",
-    category: "Rings",
-    rating: 4.9,
-    reviews: 203,
-  },
-  {
-    id: "6",
-    name: "Bracelet",
-    price: 0.0,
-    image: "/icons/bracelets.svg",
-    category: "Bracelets",
-    rating: 4.7,
-    reviews: 78,
-  },
-  {
-    id: "7",
-    name: "Chain",
-    price: 0.0,
-    image: "/icons/chains.svg",
-    category: "Chains",
-    rating: 4.8,
-    reviews: 145,
-  },
-  {
-    id: "8",
-    name: "Pendant",
-    price: 0.0,
-    image: "/icons/pendants.svg",
-    category: "Pendants",
-    rating: 4.9,
-    reviews: 98,
-  },
-]
-
-const categories = [
-  "All",
-  "Rings",
-  "Chains",
-  "Bracelets",
-  "Sets",
-  "Earrings",
-  "Anklets",
-  "Pendants",
-  "Charms",
-  "Custom Jewellery",
-]
-
-// ensure each real category (exclude "All") has 10 products by augmenting allProducts
-const _images: Record<string, string> = {
-  Rings: "/icons/rings.svg",
-  Chains: "/icons/chains.svg",
-  Pendants: "/icons/pendants.svg",
-  Bracelets: "/icons/bracelets.svg",
-  Sets: "/icons/sets.svg",
-  Earrings: "/icons/earrings.svg",
-  Anklets: "/icons/anklets.svg",
-  Charms: "/icons/charms.svg",
-  "Custom Jewellery": "/icons/custom.svg",
-}
-
-categories
-  .filter((c) => c !== "All")
-  .forEach((category) => {
-    const existing = allProducts.filter((p) => p.category === category).length
-    for (let i = existing; i < 10; i++) {
-      const idx = i + 1
-      allProducts.push({
-        id: `${category.toLowerCase().replace(/\s+/g, "-")}-${idx}`,
-        name: `${category.replace(/s$/i, "")} ${idx}`,
-        price: 0.0,
-        image: _images[category] ?? "/placeholder.jpg",
-        category,
-        rating: +(4.5 + ((i % 5) * 0.1)).toFixed(1),
-        reviews: 10 + i * 5,
-      })
-    }
-  })
+const allProducts = catalogListings
 const sortOptions = [
   { label: "Newest", value: "newest" },
   { label: "Price: Low to High", value: "price-asc" },
   { label: "Price: High to Low", value: "price-desc" },
-  { label: "Most Popular", value: "popular" },
 ]
 
 export default function ShopPage() {
+  return (
+    <Suspense fallback={<ShopLoading />}>
+      <ShopContent />
+    </Suspense>
+  )
+}
+
+function ShopLoading() {
+  return (
+    <main className="min-h-screen bg-background">
+      <Navbar />
+      <div className="mx-auto max-w-7xl px-4 py-20 text-muted-foreground">Loading collection…</div>
+      <Footer />
+    </main>
+  )
+}
+
+function ShopContent() {
+  const searchParams = useSearchParams()
+  const collectionParam = searchParams.get("collection")
+  const selectedCollection: CollectionId | "all" =
+    collectionParam === "him" || collectionParam === "her" ? collectionParam : "all"
+  const previousCollection = useRef(selectedCollection)
   const [selectedCategory, setSelectedCategory] = useState("All")
+  const [searchQuery, setSearchQuery] = useState("")
+  const [selectedDesign, setSelectedDesign] = useState("All")
+  const [selectedMaterial, setSelectedMaterial] = useState("All")
+  const [selectedStone, setSelectedStone] = useState("All")
+  const [onlyAvailable, setOnlyAvailable] = useState(false)
+  const [minPrice, setMinPrice] = useState("")
+  const [maxPrice, setMaxPrice] = useState("")
   const [sortBy, setSortBy] = useState("newest")
   const [showFilters, setShowFilters] = useState(false)
 
-  const filteredProducts = allProducts.filter(
+  useEffect(() => {
+    const collectionChanged = previousCollection.current !== selectedCollection
+    if (collectionChanged) {
+      setSelectedCategory("All")
+      setSelectedDesign("All")
+      setSelectedMaterial("All")
+      setSelectedStone("All")
+      setOnlyAvailable(false)
+      previousCollection.current = selectedCollection
+    }
+
+    const category = searchParams.get("category")
+    if (category) {
+      const matchingCategory = collectionOptions.flatMap((collection) => collection.categories)
+        .find((item) => item.toLowerCase() === category.toLowerCase())
+      if (matchingCategory) setSelectedCategory(matchingCategory)
+    } else if (collectionChanged) {
+      setSelectedCategory("All")
+    }
+    setSearchQuery(searchParams.get("q")?.trim().toLowerCase() ?? "")
+  }, [searchParams, selectedCollection])
+
+  const collectionProducts = allProducts.filter(
+    (product) => selectedCollection === "all" || product.collection === selectedCollection,
+  )
+  const categories = selectedCollection === "all"
+    ? Array.from(new Set(collectionOptions.flatMap((collection) => collection.categories)))
+    : collectionOptions.find((collection) => collection.id === selectedCollection)?.categories ?? []
+  const categoryProducts = collectionProducts.filter(
     (product) => selectedCategory === "All" || product.category === selectedCategory,
+  )
+  const optionsFor = (key: "design" | "material" | "stoneType") =>
+    Array.from(new Set(categoryProducts.map((product) => product[key]).filter((value): value is string => Boolean(value))))
+  const designOptions = optionsFor("design")
+  const materialOptions = optionsFor("material")
+  const stoneOptions = optionsFor("stoneType")
+  const hasAvailabilityData = categoryProducts.some((product) => product.availability)
+
+  const filteredProducts = categoryProducts.filter((product) =>
+    (selectedDesign === "All" || product.design === selectedDesign) &&
+    (selectedMaterial === "All" || product.material === selectedMaterial) &&
+    (selectedStone === "All" || product.stoneType === selectedStone) &&
+    (!onlyAvailable || product.availability === "in_stock") &&
+    (minPrice === "" || (product.price !== null && product.price >= Number(minPrice))) &&
+    (maxPrice === "" || (product.price !== null && product.price <= Number(maxPrice))) &&
+    (!searchQuery || [product.name, product.category, product.design, product.material, product.stoneType]
+      .filter(Boolean)
+      .some((value) => value?.toLowerCase().includes(searchQuery))),
   )
 
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     switch (sortBy) {
       case "price-asc":
+        if (a.price === null) return 1
+        if (b.price === null) return -1
         return a.price - b.price
       case "price-desc":
+        if (a.price === null) return 1
+        if (b.price === null) return -1
         return b.price - a.price
-      case "popular":
-        return b.reviews - a.reviews
       default:
         return 0
     }
@@ -160,9 +122,13 @@ export default function ShopPage() {
       {/* Page Header */}
       <section className="bg-muted py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-2 text-balance">Shop Our Collection</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-2 text-balance">
+            {selectedCollection === "all"
+              ? "Shop Our Collection"
+              : collectionOptions.find((collection) => collection.id === selectedCollection)?.label}
+          </h1>
           <p className="text-muted-foreground text-lg">
-            Discover {filteredProducts.length} timeless pieces of 925 silver jewellery
+            Explore {filteredProducts.length} jewellery listings in this collection
           </p>
         </div>
       </section>
@@ -174,15 +140,21 @@ export default function ShopPage() {
             {/* Sidebar Filters */}
             <div className={`lg:col-span-1 ${showFilters ? "block" : "hidden lg:block"}`}>
               <div className="space-y-6">
-                {/* Category Filter */}
-                <div className="space-y-4">
-                  <h3 className="font-semibold text-foreground text-lg">Categories</h3>
+                <div className="space-y-4 border-t border-border pt-6">
+                  <h3 className="font-semibold text-foreground text-lg">Jewellery Type</h3>
                   <div className="space-y-2">
-                    {categories.map((category) => (
+                    {["All", ...categories].map((category) => {
+                      const count = category === "All"
+                        ? collectionProducts.length
+                        : collectionProducts.filter((product) => product.category === category).length
+                      return (
                       <button
                         key={category}
                         onClick={() => {
                           setSelectedCategory(category)
+                          setSelectedDesign("All")
+                          setSelectedMaterial("All")
+                          setSelectedStone("All")
                           setShowFilters(false)
                         }}
                         className={`block w-full text-left px-4 py-2 rounded-lg transition-colors ${
@@ -191,50 +163,64 @@ export default function ShopPage() {
                             : "text-foreground hover:bg-muted"
                         }`}
                       >
-                        {category}
+                        {category === "All" ? `All Types (${count})` : `${category} (${count})`}
                       </button>
-                    ))}
+                      )
+                    })}
                   </div>
                 </div>
 
                 {/* Price Range */}
                 <div className="space-y-4 border-t border-border pt-6">
                   <h3 className="font-semibold text-foreground text-lg">Price Range</h3>
-                  <div className="space-y-3 text-sm text-muted-foreground">
-                    <label className="flex items-center gap-2 cursor-pointer hover:text-foreground">
-                      <input type="checkbox" className="rounded" />
-                      <span>Under ₹3,000</span>
+                  <div className="grid grid-cols-2 gap-2">
+                    <label className="text-xs text-muted-foreground">
+                      Min ₹
+                      <input type="number" min="0" value={minPrice} onChange={(event) => setMinPrice(event.target.value)} className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground" />
                     </label>
-                    <label className="flex items-center gap-2 cursor-pointer hover:text-foreground">
-                      <input type="checkbox" className="rounded" />
-                      <span>₹3,000 - ₹5,000</span>
-                    </label>
-                    <label className="flex items-center gap-2 cursor-pointer hover:text-foreground">
-                      <input type="checkbox" className="rounded" />
-                      <span>Above ₹5,000</span>
+                    <label className="text-xs text-muted-foreground">
+                      Max ₹
+                      <input type="number" min="0" value={maxPrice} onChange={(event) => setMaxPrice(event.target.value)} className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground" />
                     </label>
                   </div>
                 </div>
 
-                {/* Rating Filter */}
-                <div className="space-y-4 border-t border-border pt-6">
-                  <h3 className="font-semibold text-foreground text-lg">Rating</h3>
-                  <div className="space-y-3 text-sm text-muted-foreground">
-                    {[5, 4, 3].map((rating) => (
-                      <label key={rating} className="flex items-center gap-2 cursor-pointer hover:text-foreground">
-                        <input type="checkbox" className="rounded" />
-                        <span className="flex gap-1">
-                          {[...Array(rating)].map((_, i) => (
-                            <span key={i} className="text-accent">
-                              ★
-                            </span>
-                          ))}
-                          <span>& up</span>
-                        </span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
+                {designOptions.length > 1 && (
+                  <label className="block space-y-2 border-t border-border pt-6 text-sm font-semibold text-foreground">
+                    Design / Style
+                    <select value={selectedDesign} onChange={(event) => setSelectedDesign(event.target.value)} className="w-full rounded-lg border border-border bg-background px-3 py-2 font-normal">
+                      <option value="All">All Designs</option>
+                      {designOptions.map((design) => <option key={design} value={design}>{design}</option>)}
+                    </select>
+                  </label>
+                )}
+
+                {materialOptions.length > 1 && (
+                  <label className="block space-y-2 border-t border-border pt-6 text-sm font-semibold text-foreground">
+                    Material
+                    <select value={selectedMaterial} onChange={(event) => setSelectedMaterial(event.target.value)} className="w-full rounded-lg border border-border bg-background px-3 py-2 font-normal">
+                      <option value="All">All Materials</option>
+                      {materialOptions.map((material) => <option key={material} value={material}>{material}</option>)}
+                    </select>
+                  </label>
+                )}
+
+                {stoneOptions.length > 1 && (
+                  <label className="block space-y-2 border-t border-border pt-6 text-sm font-semibold text-foreground">
+                    Stone Type
+                    <select value={selectedStone} onChange={(event) => setSelectedStone(event.target.value)} className="w-full rounded-lg border border-border bg-background px-3 py-2 font-normal">
+                      <option value="All">All Stones</option>
+                      {stoneOptions.map((stone) => <option key={stone} value={stone}>{stone}</option>)}
+                    </select>
+                  </label>
+                )}
+
+                {hasAvailabilityData && (
+                  <label className="flex items-center gap-2 border-t border-border pt-6 text-sm text-foreground">
+                    <input type="checkbox" checked={onlyAvailable} onChange={(event) => setOnlyAvailable(event.target.checked)} className="rounded" />
+                    In stock only
+                  </label>
+                )}
               </div>
             </div>
 

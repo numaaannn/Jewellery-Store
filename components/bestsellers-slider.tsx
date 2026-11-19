@@ -4,54 +4,14 @@ import { useState } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import ProductCard from "@/components/product-card"
 import { Button } from "@/components/ui/button"
+import { storeProducts } from "@/data/store-products"
 
-const bestsellers = [
-  {
-    id: "1",
-    name: "Ring",
-    price: 0,
-    image: "/icons/rings.svg",
-    category: "Rings",
-    rating: 4.8,
-    reviews: 124,
-  },
-  {
-    id: "2",
-    name: "Chain",
-    price: 0,
-    image: "/icons/chains.svg",
-    category: "Chains",
-    rating: 4.9,
-    reviews: 89,
-  },
-  {
-    id: "3",
-    name: "Pendant",
-    price: 0,
-    image: "/icons/pendants.svg",
-    category: "Pendants",
-    rating: 4.7,
-    reviews: 156,
-  },
-  {
-    id: "4",
-    name: "Bracelet",
-    price: 0,
-    image: "/icons/bracelets.svg",
-    category: "Bracelets",
-    rating: 4.6,
-    reviews: 92,
-  },
-  {
-    id: "5",
-    name: "Ring",
-    price: 0,
-    image: "/icons/rings.svg",
-    category: "Rings",
-    rating: 4.9,
-    reviews: 203,
-  },
-]
+const featuredProducts = [
+  storeProducts.find((product) => product.collection === "him" && product.category === "Rings" && product.price !== null),
+  storeProducts.find((product) => product.collection === "her" && product.category === "Earrings" && product.price !== null),
+  storeProducts.find((product) => product.collection === "her" && product.category === "Anklets" && product.price !== null),
+  storeProducts.find((product) => product.collection === "her" && product.category === "Rings" && product.price !== null),
+].filter((product) => product !== undefined)
 
 export default function BestsellersSlider() {
   const [scrollPosition, setScrollPosition] = useState(0)
@@ -76,8 +36,8 @@ export default function BestsellersSlider() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center mb-12">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2 text-balance">Bestsellers</h2>
-            <p className="text-muted-foreground">Loved by thousands of customers worldwide</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2 text-balance">Featured Jewellery</h2>
+            <p className="text-muted-foreground">Explore pieces from Gifts for Him and Gifts for Her</p>
           </div>
 
           <div className="hidden md:flex gap-2">
@@ -105,7 +65,7 @@ export default function BestsellersSlider() {
           className="flex gap-6 overflow-x-auto pb-4 scroll-smooth"
           style={{ scrollBehavior: "smooth" }}
         >
-          {bestsellers.map((product) => (
+          {featuredProducts.map((product) => (
             <div key={product.id} className="flex-shrink-0 w-full sm:w-1/2 lg:w-1/4">
               <ProductCard {...product} />
             </div>

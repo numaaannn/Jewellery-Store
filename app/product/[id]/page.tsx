@@ -6,6 +6,8 @@ import Footer from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Heart, Share2, ShoppingBag, Truck, Shield, RotateCcw } from "lucide-react"
 import ProductCard from "@/components/product-card"
+import { storeProducts } from "@/data/store-products"
+import { useCart } from "@/components/cart-provider"
 
 const productDetails: Record<string, any> = {
   "1": {
@@ -50,43 +52,37 @@ const productDetails: Record<string, any> = {
   },
 }
 
-const relatedProducts = [
-  {
-    id: "3",
-    name: "Pendant",
-    price: 0,
-    image: "/icons/pendants.svg",
-    category: "Pendants",
-    rating: 4.7,
-    reviews: 156,
-  },
-  {
-    id: "4",
-    name: "Bracelet",
-    price: 0,
-    image: "/icons/bracelets.svg",
-    category: "Bracelets",
-    rating: 4.6,
-    reviews: 92,
-  },
-  {
-    id: "5",
-    name: "Ring",
-    price: 0,
-    image: "/icons/rings.svg",
-    category: "Rings",
-    rating: 4.9,
-    reviews: 203,
-  },
-]
-
 export default function ProductPage({ params }: { params: { id: string } }) {
-  const product = productDetails[params.id] || productDetails["1"]
+  const catalogProduct = storeProducts.find((item) => item.id === params.id)
+  const product = productDetails[params.id] || (catalogProduct ? {
+    ...catalogProduct,
+    originalPrice: catalogProduct.price,
+    rating: 0,
+    reviews: 0,
+    description: catalogProduct.price === null
+      ? "Product details and pricing are being confirmed. Please contact Giftora for current information."
+      : `${catalogProduct.name} from the GIFTORA silver gifts collection. Contact us for product specifications.`,
+    details: [
+      `Collection: Gifts for ${catalogProduct.collection === "him" ? "Him" : "Her"}`,
+      `Jewellery Type: ${catalogProduct.category}`,
+      ...(catalogProduct.design ? [`Design / Style: ${catalogProduct.design}`] : []),
+      ...(catalogProduct.stoneType ? [`Stone Type: ${catalogProduct.stoneType}`] : []),
+    ],
+    images: [catalogProduct.image],
+  } : productDetails["1"])
   const [quantity, setQuantity] = useState(1)
   const [isFavorite, setIsFavorite] = useState(false)
   const [selectedImage, setSelectedImage] = useState(0)
+  const { addItem } = useCart()
+  const relatedProducts = catalogProduct
+    ? storeProducts.filter(
+        (item) => item.id !== params.id && item.collection === catalogProduct.collection && item.category === catalogProduct.category,
+      ).slice(0, 3)
+    : storeProducts.filter((item) => item.id !== params.id).slice(0, 3)
 
-  const discount = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
+  const discount = product.originalPrice > 0 && product.price !== null
+    ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
+    : 0
 
   return (
     <main className="min-h-screen bg-background">
@@ -131,26 +127,32 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                 <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4 text-balance">{product.name}</h1>
 
                 {/* Rating */}
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="flex gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <span
-                        key={i}
-                        className={`text-lg ${i < Math.floor(product.rating) ? "text-accent" : "text-muted"}`}
-                      >
-                        ★
-                      </span>
-                    ))}
+                {product.reviews > 0 && (
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="flex gap-1">
+                      {[...Array(5)].map((_, i) => (
+                        <span
+                          key={i}
+                          className={`text-lg ${i < Math.floor(product.rating) ? "text-accent" : "text-muted"}`}
+                        >
+                          ★
+                        </span>
+                      ))}
+                    </div>
+                    <span className="text-sm text-muted-foreground">({product.reviews} reviews)</span>
                   </div>
-                  <span className="text-sm text-muted-foreground">({product.reviews} reviews)</span>
-                </div>
+                )}
 
                 {/* Price */}
                 <div className="flex items-center gap-4 mb-6">
-                  <span className="text-3xl font-bold text-foreground">₹{product.price.toLocaleString()}</span>
-                  <span className="text-lg text-muted-foreground line-through">
-                    ₹{product.originalPrice.toLocaleString()}
+                  <span className="text-3xl font-bold text-foreground">
+                    {product.price === null ? "Price pending" : `₹${product.price.toLocaleString("en-IN")}`}
                   </span>
+                  {product.originalPrice > product.price && (
+                    <span className="text-lg text-muted-foreground line-through">
+                      ₹{product.originalPrice.toLocaleString("en-IN")}
+                    </span>
+                  )}
                   {discount > 0 && (
                     <span className="text-sm font-semibold text-accent bg-accent/10 px-3 py-1 rounded-full">
                       {discount}% OFF
@@ -189,7 +191,16 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                       +
                     </button>
                   </div>
-                  <Button className="flex-1 bg-secondary text-secondary-foreground hover:bg-secondary/90 text-base py-6">
+                  <Button
+                    disabled={product.price === null}
+                    onClick={() =>
+                      product.price !== null && addItem(
+                        { id: product.id, name: product.name, price: product.price, image: product.image },
+                        quantity,
+                      )
+                    }
+                    className="flex-1 bg-secondary text-secondary-foreground hover:bg-secondary/90 text-base py-6"
+                  >
                     <ShoppingBag className="w-5 h-5 mr-2" />
                     Add to Cart
                   </Button>

@@ -34,9 +34,9 @@ Here is store-specific information for GIFTORA:
 - Store Name: GIFTORA
 - Contact Email: contact@numaanssilvershop.com
 - Contact Phone / WhatsApp: +91-8390963603 (WhatsApp link: https://wa.me/918390963603)
-- Product Categories: Rings, Necklaces, Earrings, Bracelets, Anklets, Bangles, Pendants, Sets, Chains, Cufflinks, and Custom Jewelry.
+- Product Collections and Categories: Gifts for Him includes Rings, Chains, Bracelets, and Studs. Gifts for Her includes Rings, Earrings, Bracelets, Anklets, Pendants, and Sets. Treat designs such as CZ Bali, Italian, Solitaire, and Diamond as product attributes, not categories.
 - Custom Jewelry: We craft custom engraved name rings, necklaces, and bespoke designs. Customers can contact us via email or WhatsApp to design their own pieces.
-- Materials: We specialize in certified 925 Sterling Silver, including pure silver, oxidized silver, and silver with gemstones (like pearl, gemstone charm bracelets). Some collections include gold, platinum, and diamonds.
+- Product details: Only state a product's material, price, or stock status when that information is present in its listing. If a detail is missing, ask the customer to contact store support rather than guessing.
 - Sizing: Standard ring sizes are available. Custom sizing can be requested for bespoke jewelry.
 - Shipping: Handcrafted orders are typically processed within 3-5 business days. Delivery times are 5-7 business days depending on location. We offer free shipping on major order categories.
 - Returns & Exchanges: Return or exchange requests are accepted within 7 days of delivery for unworn items in their original packaging. Note: Custom-made or engraved items are final sale and cannot be returned unless defective.

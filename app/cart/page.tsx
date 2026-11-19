@@ -1,58 +1,18 @@
 "use client"
 
-import { useState, useCallback, useMemo } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Trash2, Plus, Minus, ShoppingBag } from "lucide-react"
-
-interface CartItem {
-  id: string
-  name: string
-  price: number
-  quantity: number
-  image: string
-}
-
-const initialCart: CartItem[] = [
-  {
-    id: "1",
-    name: "Rings",
-    price: 0,
-    quantity: 1,
-    image: "/icons/rings.svg",
-  },
-  {
-    id: "2",
-    name: "Chains",
-    price: 0,
-    quantity: 2,
-    image: "/icons/chains.svg",
-  },
-]
+import { useCart } from "@/components/cart-provider"
 
 export default function CartPage() {
-  const [cartItems, setCartItems] = useState<CartItem[]>(initialCart)
-
-  const removeItem = useCallback((id: string) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== id))
-  }, [])
-
-  const updateQuantity = useCallback((id: string, newQuantity: number) => {
-    if (newQuantity <= 0) {
-      setCartItems((prev) => prev.filter((item) => item.id !== id))
-      return
-    }
-
-    setCartItems((prev) => prev.map((item) => (item.id === id ? { ...item, quantity: newQuantity } : item)))
-  }, [])
-
-  const subtotal = useMemo(() => cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0), [cartItems])
-  const shipping = useMemo(() => (subtotal > 5000 ? 0 : 200), [subtotal])
-  const tax = useMemo(() => Math.round(subtotal * 0.18), [subtotal])
-  const total = useMemo(() => subtotal + shipping + tax, [subtotal, shipping, tax])
+  const { items: cartItems, removeItem, updateQty: updateQuantity, subtotal } = useCart()
+  const shipping = subtotal > 5000 ? 0 : 200
+  const tax = Math.round(subtotal * 0.18)
+  const total = subtotal + shipping + tax
 
   return (
     <main className="min-h-screen bg-background">
@@ -109,14 +69,14 @@ export default function CartPage() {
 
                       <div className="flex items-center border border-border rounded-lg">
                         <button
-                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                          onClick={() => updateQuantity(item.id, item.qty - 1)}
                           className="px-3 py-1 text-foreground hover:bg-muted transition-colors"
                         >
                           <Minus className="w-4 h-4" />
                         </button>
-                        <span className="px-4 py-1 font-semibold text-foreground">{item.quantity}</span>
+                        <span className="px-4 py-1 font-semibold text-foreground">{item.qty}</span>
                         <button
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          onClick={() => updateQuantity(item.id, item.qty + 1)}
                           className="px-3 py-1 text-foreground hover:bg-muted transition-colors"
                         >
                           <Plus className="w-4 h-4" />

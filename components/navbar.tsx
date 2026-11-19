@@ -8,6 +8,7 @@ import CartDrawer from "@/components/cart-drawer"
 import SearchBar from "@/components/search-bar"
 import { ThemeToggle } from "@/components/theme-toggle"
 import BrandLogo from "@/components/brand-logo"
+import { collectionOptions } from "@/data/store-products"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -15,7 +16,10 @@ export default function Navbar() {
   const { count, openCart } = useCart()
 
   const navLinks = [
-    { label: "Shop", href: "/shop" },
+    ...collectionOptions.map((collection) => ({
+      label: collection.label,
+      href: `/shop?collection=${collection.id}`,
+    })),
     { label: "Custom Jewellery", href: "/custom-jewelry" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
@@ -34,7 +38,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-3 lg:gap-6 xl:gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.href}

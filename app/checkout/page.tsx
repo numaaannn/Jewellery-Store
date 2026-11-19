@@ -8,6 +8,7 @@ import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Check, Lock } from "lucide-react"
+import { useCart } from "@/components/cart-provider"
 
 interface FormData {
   firstName: string
@@ -25,6 +26,7 @@ interface FormData {
 }
 
 export default function CheckoutPage() {
+  const { items } = useCart()
   const [step, setStep] = useState<"shipping" | "payment" | "confirmation">("shipping")
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
@@ -56,9 +58,9 @@ export default function CheckoutPage() {
     setStep("confirmation")
   }
 
-  const subtotal = 9497
-  const shipping = 0
-  const tax = 1710
+  const subtotal = items.reduce((sum, item) => sum + item.price * item.qty, 0)
+  const shipping = subtotal > 5000 ? 0 : 200
+  const tax = Math.round(subtotal * 0.18)
   const total = subtotal + shipping + tax
 
   return (
@@ -336,7 +338,7 @@ export default function CheckoutPage() {
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Shipping</span>
-                    <span className="font-medium text-accent">Free</span>
+                    <span className="font-medium text-accent">{shipping === 0 ? "Free" : `₹${shipping.toLocaleString("en-IN")}`}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Tax (18%)</span>
@@ -352,8 +354,9 @@ export default function CheckoutPage() {
                 <div className="bg-background rounded p-3 text-xs text-muted-foreground space-y-2">
                   <p className="font-semibold text-foreground">Order includes:</p>
                   <ul className="space-y-1">
-                    <li>✓ Minimalist Silver Ring (1x)</li>
-                    <li>✓ Delicate Silver Chain (2x)</li>
+                    {items.length ? items.map((item) => (
+                      <li key={item.id}>✓ {item.name} ({item.qty}x)</li>
+                    )) : <li>Your cart is empty</li>}
                   </ul>
                 </div>
               </div>
